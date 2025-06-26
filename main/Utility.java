@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import entity.Entity;
@@ -159,9 +163,9 @@ public class Utility {
 
     public boolean ObjectWithinScreenBounds(ObjectHandler obj) {
         return obj.worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
-            obj.worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-            obj.worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
-            obj.worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY;
+                obj.worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
+                obj.worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
+                obj.worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY;
     }
 
     public int centerTextX(FontMetrics fontMetric, String text, Graphics2D g2d) {
@@ -196,8 +200,50 @@ public class Utility {
         gamePanel.sound.fc.setValue(gamePanel.sound.currentVolume);
     }
 
-    public void muteMusic() {
+    public void muteMusic(boolean input) {
+        if (!keyInput.muteMusic) {
+            gamePanel.sound.stop();
+            keyInput.muteMusic = true;
+        } else {
+            gamePanel.sound.play();
+            keyInput.muteMusic = false;
+        }
+    }
+
+    public void playForwardMusic(int gameMusicIdx) {
+        int newGameMusicIdx = gameMusicIdx + 1;
+        if (newGameMusicIdx > gamePanel.sound.sounds.size() - 1) {
+            newGameMusicIdx = 1;
+            gamePanel.sound.gameMusicIdx = newGameMusicIdx;
+            playNewMusic(gamePanel.sound.gameMusicIdx);
+        } else {
+            gamePanel.sound.gameMusicIdx = newGameMusicIdx;
+            playNewMusic(gamePanel.sound.gameMusicIdx);
+        }
+
+    }
+
+    public void playNewMusic(int inputIndex) {
         gamePanel.sound.stop();
+        gamePanel.sound.setSound(inputIndex);
+        gamePanel.sound.play();
+        gamePanel.sound.fc.setValue(gamePanel.sound.currentVolume);
+        gamePanel.sound.loop();
+    }
+
+    public String extractSongName() {
+        URL song = gamePanel.sound.sounds.get(gamePanel.sound.gameMusicIdx);
+        String path = song.getPath();
+        File file = new File(path);
+        String fileName = file.getName();
+
+        String decodedName = URLDecoder.decode(fileName, StandardCharsets.UTF_8);
+        int dotIndex = decodedName.lastIndexOf('.');
+        if (dotIndex > 0) {
+            decodedName = decodedName.substring(0, dotIndex);
+        }
+
+        return decodedName;
     }
 
 }

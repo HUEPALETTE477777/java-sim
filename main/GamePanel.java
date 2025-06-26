@@ -18,8 +18,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int scale = 2;
 
     public final int tileSize = originalTileSize * scale; // 64 pixels (SCALES FOR EVERY TILE)
-    public final int SCREEN_WIDTH = 900;
-    public final int SCREEN_HEIGHT = 690;
+    public final int SCREEN_WIDTH = 1240;
+    public final int SCREEN_HEIGHT = 930;
 
     // SCREEN ROWS/COLS
     public final int maxScreenRow = SCREEN_WIDTH / tileSize; // 20 ROWS
@@ -64,8 +64,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         assets.setNPC();
         assets.setObjects();
-        
-        sound.playBackgroundMusic(0);
+
+        sound.playBackgroundMusic();
         gameState = MENU_STATE;
     }
 
@@ -135,7 +135,7 @@ public class GamePanel extends JPanel implements Runnable {
                     ent.update();
                 }
             }
-
+            sound.update();
         }
 
         // if (utilTool.isPauseState()) {

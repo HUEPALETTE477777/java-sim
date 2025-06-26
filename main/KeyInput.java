@@ -10,6 +10,7 @@ public class KeyInput implements KeyListener {
     public boolean up, left, right, down;
     public boolean HUD = true;
     public boolean openNPCPrompt = false;
+    public boolean muteMusic = false;
 
     private final GamePanel gamePanel; // REQUIRED FOR GAME STATE!
 
@@ -43,7 +44,9 @@ public class KeyInput implements KeyListener {
 
         switch (keyCode) {
             case KeyEvent.VK_BACK_QUOTE -> gamePanel.utilTool.toggleBoolean(HUD);
-            case KeyEvent.VK_B -> gamePanel.utilTool.muteMusic();
+            case KeyEvent.VK_B -> {
+                gamePanel.utilTool.muteMusic(muteMusic);
+            }
             case KeyEvent.VK_F7 -> gamePanel.utilTool.volumeUp();
             case KeyEvent.VK_F8 -> gamePanel.utilTool.volumeDown();
             case KeyEvent.VK_P -> togglePauseState();
@@ -53,6 +56,14 @@ public class KeyInput implements KeyListener {
             // DIALOGUE OPTIONS
             case KeyEvent.VK_1 -> handleDialogueChoice(1);
             case KeyEvent.VK_2 -> handleDialogueChoice(2);
+
+            case KeyEvent.VK_F -> {
+                if (gamePanel.gameState != gamePanel.MENU_STATE) {
+                    int currentMusicIdx = gamePanel.sound.gameMusicIdx;
+                    gamePanel.utilTool.playForwardMusic(currentMusicIdx);
+                    System.out.println("CURRENT GAME MUSIC INDEX: " + gamePanel.sound.gameMusicIdx);
+                }
+            }
 
         }
     }
@@ -82,7 +93,6 @@ public class KeyInput implements KeyListener {
         }
     }
 
-
     public void togglePauseState() {
         if (gamePanel.gameState == gamePanel.PLAY_STATE) {
             gamePanel.gameState = gamePanel.PAUSE_STATE;
@@ -106,15 +116,16 @@ public class KeyInput implements KeyListener {
             // }
         }
 
+        // FUTURE ME HAS TO DEAL WITH THIS LOGIC LATER BECAUSE WE WANT THE USER
+        // TO BE ABLE TO GO BACK TO MENU, FOR NOW YOU CANNOT
         if (gamePanel.gameState == gamePanel.MENU_STATE) {
             gamePanel.gameState = gamePanel.PLAY_STATE;
-            gamePanel.sound.stop();
-            gamePanel.sound.playBackgroundMusic(1);
+            gamePanel.utilTool.playNewMusic(gamePanel.sound.gameMusicIdx);
         }
     }
-    
+
     public void handleEKey() {
-    	if (gamePanel.gameState == gamePanel.PLAY_STATE) {
+        if (gamePanel.gameState == gamePanel.PLAY_STATE) {
             openNPCPrompt = true;
         }
         if (gamePanel.gameState == gamePanel.DIALOGUE_STATE) {
@@ -126,12 +137,12 @@ public class KeyInput implements KeyListener {
     }
 
     public void handleDialogueChoice(int choice) {
-    	if (gamePanel.gameState == gamePanel.DIALOGUE_STATE) {
-    		Entity npc = gamePanel.utilTool.fetchCollidingNPC();
+        if (gamePanel.gameState == gamePanel.DIALOGUE_STATE) {
+            Entity npc = gamePanel.utilTool.fetchCollidingNPC();
             if (npc != null) {
                 npc.handleChoice(choice);
             }
-    	}
+        }
     }
 
 }

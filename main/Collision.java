@@ -90,6 +90,10 @@ public class Collision {
         }
     }
 
+    public void playerToObjectCollision() {
+        
+    }
+
     public int getCollidingNPCIndex() {
         return collidingNPCIndex;
     }

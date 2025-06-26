@@ -29,7 +29,8 @@ public class UI {
     public String currentDialogue = "";
     public BufferedImage dialogueCharacterImage;
 
-    public UI(GamePanel gamePanel, Player player, KeyInput keyInput, TileHandler tileHandler, Sound sound, Entity[] npc) {
+    public UI(GamePanel gamePanel, Player player, KeyInput keyInput, TileHandler tileHandler, Sound sound,
+            Entity[] npc) {
         this.gamePanel = gamePanel;
         this.player = player;
         this.keyInput = keyInput;
@@ -48,24 +49,24 @@ public class UI {
     public void display(Graphics2D g2d) {
         // 0, 1, 2, 3 => MENU, PLAY, PAUSE, DIALOGUE
         switch (gamePanel.gameState) {
-        case 0:
-            menuComponent.menuScreen(g2d);
-        	break;
-        case 1:
-        	renderPlayState(g2d);
-        	break;
-        case 2:
-        	pauseScreen(g2d);
-        	break;
-        case 3:
-            dialogueComponent.dialogueScreen(g2d);
-        	break;
-		default:
-			break;
+            case 0:
+                menuComponent.menuScreen(g2d);
+                break;
+            case 1:
+                renderPlayState(g2d);
+                break;
+            case 2:
+                pauseScreen(g2d);
+                break;
+            case 3:
+                dialogueComponent.dialogueScreen(g2d);
+                break;
+            default:
+                break;
         }
-        
+
     }
-    
+
     public void renderPlayState(Graphics2D g2d) {
         if (utilTool.isHUD()) {
             drawHUD(g2d);
@@ -73,15 +74,16 @@ public class UI {
             redraw(g2d);
         }
     }
-    
-    private void drawHUD(Graphics2D g2d) {
+
+    public void drawHUD(Graphics2D g2d) {
         g2d.setColor(Color.BLACK);
         g2d.setFont(g2d.getFont().deriveFont(18f));
         g2d.drawString("FPS: " + gamePanel.fpsUpdate, 10, 30);
         g2d.drawString("X: " + player.getX() + " Y: " + player.getY(), 10, 50);
         g2d.drawString("VOLUME (FLOAT): " + sound.currentVolume + "F", 10, 70);
+        g2d.drawString("CURRENT SONG: " + gamePanel.utilTool.extractSongName(), 10, 90);
+        g2d.drawString("AUDIO DURATION: " + gamePanel.sound.currentAudioSecond + "/" + gamePanel.sound.currentAudioDuration + " SECONDS", 10, 110);
     }
-    
 
     public void pauseScreen(Graphics2D g2d) {
         String text = "PAUSED";
@@ -92,12 +94,11 @@ public class UI {
         int yCords = utilTool.centerTextY(fontMetric, text, g2d);
 
         g2d.drawString(text, xCords, yCords);
-    } 
-    
+    }
 
     public void redraw(Graphics2D g2d) {
         tileHandler.draw(g2d);
-        
+
         for (Entity ent : npc) {
             if (ent != null) {
                 ent.draw(g2d);
