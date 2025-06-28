@@ -34,6 +34,7 @@ public class Sound {
         sounds.add(getClass().getResource("/sounds/MenuMusic.wav"));
         sounds.add(getClass().getResource("/sounds/Dysfunctional - Tech N9ne.wav"));
         sounds.add(getClass().getResource("/sounds/Judas - Lady Gaga (Sped Up).wav"));
+        sounds.add(getClass().getResource("/sounds/Industry Baby - Lil Nas X & Jack Harlow (Sped Up).wav"));
 
         this.gamePanel = gamePanel;
         this.keyInput = keyInput;

@@ -57,6 +57,8 @@ public class KeyInput implements KeyListener {
             case KeyEvent.VK_1 -> handleDialogueChoice(1);
             case KeyEvent.VK_2 -> handleDialogueChoice(2);
 
+            case KeyEvent.VK_BACK_SLASH -> toggleControlState();
+
             case KeyEvent.VK_F -> {
                 if (gamePanel.gameState != gamePanel.MENU_STATE) {
                     int currentMusicIdx = gamePanel.sound.gameMusicIdx;
@@ -100,6 +102,14 @@ public class KeyInput implements KeyListener {
         } else if (gamePanel.gameState == gamePanel.PAUSE_STATE) {
             gamePanel.gameState = gamePanel.PLAY_STATE;
             gamePanel.sound.play();
+        }
+    }
+
+    public void toggleControlState() {
+        if (gamePanel.gameState == gamePanel.PLAY_STATE) {
+            gamePanel.gameState = gamePanel.CONTROL_STATE;
+        } else if (gamePanel.gameState == gamePanel.CONTROL_STATE) {
+            gamePanel.gameState = gamePanel.PLAY_STATE;
         }
     }
 

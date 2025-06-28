@@ -41,6 +41,10 @@ public class Utility {
         return gamePanel.gameState == gamePanel.DIALOGUE_STATE;
     }
 
+    public boolean isControlState() {
+        return gamePanel.gameState == gamePanel.CONTROL_STATE;
+    }
+
     // UPDATE COLLISION
     public void updateTileCollision(Entity entity) {
         entity.collisionToggle = false;
@@ -246,5 +250,7 @@ public class Utility {
 
         return decodedName;
     }
+
+    
 
 }

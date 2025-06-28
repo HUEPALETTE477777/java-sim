@@ -25,6 +25,7 @@ public class UI {
 
     public Menu menuComponent;
     public Dialogue dialogueComponent;
+    public Controls controlsComponent;
 
     public String currentDialogue = "";
     public BufferedImage dialogueCharacterImage;
@@ -40,6 +41,7 @@ public class UI {
         utilTool = new Utility(this.gamePanel, this.keyInput);
         menuComponent = new Menu(gamePanel);
         dialogueComponent = new Dialogue(gamePanel);
+        controlsComponent = new Controls(gamePanel);
     }
 
     public void update(int fpsCount) {
@@ -61,6 +63,8 @@ public class UI {
             case 3:
                 dialogueComponent.dialogueScreen(g2d);
                 break;
+            case 4: 
+                controlsComponent.controlsScreen(g2d);
             default:
                 break;
         }

@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int PLAY_STATE = 1;
     public final int PAUSE_STATE = 2;
     public final int DIALOGUE_STATE = 3;
+    public final int CONTROL_STATE = 4;
 
     // GAME COMPONENTS
     public TileHandler tileHandler = new TileHandler(this);
@@ -127,7 +128,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (utilTool.isPlayState()) {
+        if (utilTool.isPlayState() || utilTool.isControlState()) {
             player.update();
             ui.update(fpsUpdate);
 
