@@ -97,6 +97,10 @@ public class Sound {
                 currentAudioSecond = (int) (clip.getMicrosecondPosition() / 1000000);
                 lastSecondUpdate = currentTimeMillis;
             }
+
+            if (currentAudioSecond > currentAudioDuration) {
+                currentAudioSecond = 0;
+            }
         }
 
     }

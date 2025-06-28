@@ -3,12 +3,13 @@ package main;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 import entity.Entity;
 import entity.Player;
-import main.objects.ObjectHandler;
+import main.objects.Object;
 import tile.TileHandler;
 import ui.UI;
 
@@ -48,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Sound sound = new Sound(this, keyInput, utilTool);
 
     public Entity[] npc = new Entity[10];
-    public ObjectHandler[] obj = new ObjectHandler[10];
+    public ArrayList<Object> obj = new ArrayList<>();
 
     public UI ui = new UI(this, player, keyInput, tileHandler, sound, npc);
     public Collision collision = new Collision(this);
@@ -160,7 +161,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileHandler.draw(g2d);
 
-        for (ObjectHandler entry : obj) {
+        for (Object entry : obj) {
             if (entry != null) {
                 entry.draw(g2d);
             }

@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import entity.Entity;
-import main.objects.ObjectHandler;
+import main.objects.Object;
 
 public class Utility {
     GamePanel gamePanel;
@@ -45,6 +45,7 @@ public class Utility {
     public void updateTileCollision(Entity entity) {
         entity.collisionToggle = false;
         gamePanel.collision.checkTileCollision(entity);
+        gamePanel.collision.isCollidingWithItem(entity);
     }
 
     // GET THE NPC WE ARE CURRENTLY COLLIDING WITH
@@ -161,7 +162,7 @@ public class Utility {
                 entity.worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY;
     }
 
-    public boolean ObjectWithinScreenBounds(ObjectHandler obj) {
+    public boolean ObjectWithinScreenBounds(Object obj) {
         return obj.worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
                 obj.worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
                 obj.worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&

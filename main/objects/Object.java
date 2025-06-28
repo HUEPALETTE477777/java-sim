@@ -4,18 +4,21 @@ import main.GamePanel;
 import main.Utility;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-public class ObjectHandler {
+public class Object {
     public BufferedImage image;
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
+    public boolean isItem = true;
+    public Rectangle collisionBox = new Rectangle(0, 0, 64, 64);
 
     GamePanel gamePanel;
     Utility utilTool;
 
-    public ObjectHandler(GamePanel gamePanel, Utility utilTool) {
+    public Object(GamePanel gamePanel, Utility utilTool) {
         this.gamePanel = gamePanel;
         this.utilTool = utilTool;
     }

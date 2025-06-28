@@ -5,7 +5,7 @@ import javax.imageio.ImageIO;
 import entity.Entity;
 import entity.NPC_GaryPearlson;
 import main.objects.OBJ_KNIFE;
-import main.objects.ObjectHandler;
+import main.objects.Object;
 
 import java.awt.image.BufferedImage;
 
@@ -27,9 +27,9 @@ public class Assets {
     }
 
     public void setObjects() {
-        gamePanel.obj[0] = new OBJ_KNIFE(gamePanel, utilTool);
-        gamePanel.obj[0].worldX = 128;
-        gamePanel.obj[0].worldY = 128;
+        gamePanel.obj.add(new OBJ_KNIFE(gamePanel, utilTool));
+        gamePanel.obj.get(0).worldX = 128;
+        gamePanel.obj.get(0).worldY = 128;
 
     }
 
@@ -56,7 +56,7 @@ public class Assets {
         entity.up2 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
     }
 
-    public void setUpObjectImages(ObjectHandler obj, String objName) {
+    public void setUpObjectImages(Object obj, String objName) {
         obj.image = ImageRetrieval("/images/objects/" + objName);
     }
 

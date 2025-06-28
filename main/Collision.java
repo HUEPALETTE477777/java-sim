@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import main.objects.Object;
 
 public class Collision {
     GamePanel gamePanel;
@@ -91,7 +92,7 @@ public class Collision {
     }
 
     public void playerToObjectCollision() {
-        
+
     }
 
     public int getCollidingNPCIndex() {
@@ -114,6 +115,28 @@ public class Collision {
                 entity1Left < entity2Right &&
                 entity1Bottom > entity2Top &&
                 entity1Top < entity2Bottom;
+    }
+
+    public boolean isCollidingWithItem(Entity entity) {
+        int entityLeft = entity.worldX + entity.collisionBox.x;
+        int entityRight = entity.worldX + entity.collisionBox.x + entity.collisionBox.width;
+        int entityTop = entity.worldY + entity.collisionBox.y;
+        int entityBottom = entity.worldY + entity.collisionBox.y + entity.collisionBox.height;
+
+        for (Object item : gamePanel.obj) {
+            int itemLeft = item.worldX + item.collisionBox.x;
+            int itemRight = item.worldX + item.collisionBox.x + item.collisionBox.width;
+            int itemTop = item.worldY + item.collisionBox.y;
+            int itemBottom = item.worldY + item.collisionBox.y + item.collisionBox.height;
+
+            boolean collisionCheck = entityRight > itemLeft && entityLeft < itemRight && entityBottom > itemTop && entityTop < itemBottom;
+            if (collisionCheck) {
+                System.out.println("COLLIDING WITH OBJECT: " + item.name);
+            }
+
+        }
+
+        return false;
     }
 
 }
