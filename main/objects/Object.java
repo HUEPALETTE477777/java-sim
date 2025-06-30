@@ -29,10 +29,18 @@ public class Object {
 
         boolean withinCameraBounds = gamePanel.utilTool.ObjectWithinScreenBounds(this);
         if (withinCameraBounds) {
-            // BufferedImage currentImage = gamePanel.utilTool.updateSpriteImage(this);
-            g2d.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
-            // gamePanel.utilTool.entityNameAlignment(g2d, screenX, screenY, entityName);
+            if (!gamePanel.collision.isCollidingWithItem(gamePanel.player)) {
+                g2d.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+            }
         }
+    }
+
+    public void fetchImage() {
+        gamePanel.assets.setUpObjectImages(this, name);
+    }
+
+    public void update() {
+        
     }
 
 }

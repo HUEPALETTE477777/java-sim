@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import entity.Entity;
+
 import main.objects.Object;
 
 public class Utility {
@@ -45,11 +46,14 @@ public class Utility {
         return gamePanel.gameState == gamePanel.CONTROL_STATE;
     }
 
+    public boolean isInventoryState() {
+        return gamePanel.gameState == gamePanel.INVENTORY_STATE;   
+    }
+
     // UPDATE COLLISION
     public void updateTileCollision(Entity entity) {
         entity.collisionToggle = false;
         gamePanel.collision.checkTileCollision(entity);
-        gamePanel.collision.isCollidingWithItem(entity);
     }
 
     // GET THE NPC WE ARE CURRENTLY COLLIDING WITH
@@ -250,7 +254,6 @@ public class Utility {
 
         return decodedName;
     }
-
     
 
 }

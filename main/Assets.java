@@ -28,9 +28,6 @@ public class Assets {
 
     public void setObjects() {
         gamePanel.obj.add(new OBJ_KNIFE(gamePanel, utilTool));
-        gamePanel.obj.get(0).worldX = 128;
-        gamePanel.obj.get(0).worldY = 128;
-
     }
 
     /**********************************************************************************************************

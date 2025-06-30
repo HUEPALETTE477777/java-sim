@@ -118,8 +118,10 @@ public class Collision {
         int entityRight = entity.worldX + entity.collisionBox.x + entity.collisionBox.width;
         int entityTop = entity.worldY + entity.collisionBox.y;
         int entityBottom = entity.worldY + entity.collisionBox.y + entity.collisionBox.height;
+        
+        for (int i = gamePanel.obj.size() - 1; i >= 0; i--) {
+            Object item = gamePanel.obj.get(i);
 
-        for (Object item : gamePanel.obj) {
             int itemLeft = item.worldX + item.collisionBox.x;
             int itemRight = item.worldX + item.collisionBox.x + item.collisionBox.width;
             int itemTop = item.worldY + item.collisionBox.y;
@@ -127,9 +129,9 @@ public class Collision {
 
             boolean collisionCheck = entityRight > itemLeft && entityLeft < itemRight && entityBottom > itemTop && entityTop < itemBottom;
             if (collisionCheck) {
-                System.out.println("COLLIDING WITH OBJECT: " + item.name);
+                gamePanel.inventory.add(item);
+                gamePanel.obj.remove(i);
             }
-
         }
 
         return false;

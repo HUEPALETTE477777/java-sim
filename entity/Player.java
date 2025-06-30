@@ -1,8 +1,5 @@
 package entity;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
 import main.GamePanel;
 import main.KeyInput;
 import main.Utility;
@@ -118,9 +115,5 @@ public class Player extends Entity {
         }
     }
 
-    public void draw(Graphics2D g2d) {
-        BufferedImage image = gamePanel.utilTool.updateSpriteImage(this);
-        g2d.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
-        utilTool.entityNameAlignment(g2d, screenX, screenY, entityName);
-    }
+
 }

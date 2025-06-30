@@ -58,6 +58,7 @@ public class KeyInput implements KeyListener {
             case KeyEvent.VK_2 -> handleDialogueChoice(2);
 
             case KeyEvent.VK_BACK_SLASH -> toggleControlState();
+            case KeyEvent.VK_I -> toggleInventoryState();
 
             case KeyEvent.VK_F -> {
                 if (gamePanel.gameState != gamePanel.MENU_STATE) {
@@ -109,6 +110,14 @@ public class KeyInput implements KeyListener {
         if (gamePanel.gameState == gamePanel.PLAY_STATE) {
             gamePanel.gameState = gamePanel.CONTROL_STATE;
         } else if (gamePanel.gameState == gamePanel.CONTROL_STATE) {
+            gamePanel.gameState = gamePanel.PLAY_STATE;
+        }
+    }
+
+    public void toggleInventoryState() {
+        if (gamePanel.gameState == gamePanel.PLAY_STATE) {
+            gamePanel.gameState = gamePanel.INVENTORY_STATE;
+        } else if (gamePanel.gameState == gamePanel.INVENTORY_STATE) {
             gamePanel.gameState = gamePanel.PLAY_STATE;
         }
     }

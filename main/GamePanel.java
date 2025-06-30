@@ -33,13 +33,14 @@ public class GamePanel extends JPanel implements Runnable {
     // KRAP FPS
     public int fpsUpdate = 0;
 
-    // GAME STATE, SHOULD BE ENUMS INSTEAD JERK.. NOT CHANGING NOW
+    // GAME STATE, SHOULD BE AN ENUM INSTEAD JERK.. NOT CHANGING NOW
     public int gameState;
     public final int MENU_STATE = 0;
     public final int PLAY_STATE = 1;
     public final int PAUSE_STATE = 2;
     public final int DIALOGUE_STATE = 3;
     public final int CONTROL_STATE = 4;
+    public final int INVENTORY_STATE = 5;
 
     // GAME COMPONENTS
     public TileHandler tileHandler = new TileHandler(this);
@@ -51,6 +52,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Entity[] npc = new Entity[10];
     public ArrayList<Object> obj = new ArrayList<>();
+
+    public ArrayList<Object> inventory = new ArrayList<>();
 
     public UI ui = new UI(this, player, keyInput, tileHandler, sound, npc);
     public Collision collision = new Collision(this);
@@ -128,7 +131,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (utilTool.isPlayState() || utilTool.isControlState()) {
+        if (utilTool.isPlayState() || utilTool.isControlState() || utilTool.isInventoryState()) {
             player.update();
             ui.update(fpsUpdate);
 
@@ -137,7 +140,20 @@ public class GamePanel extends JPanel implements Runnable {
                     ent.update();
                 }
             }
+
+            for (Object obj : obj) {
+                if (obj != null) {
+                    obj.update();
+                }
+            }
+
             sound.update();
+
+            // for (int i = 0; i < inventory.size(); ++i) {
+            //     Object ownedItem = inventory.get(i);
+            //     System.out.println(ownedItem.name);
+            // }
+
         }
 
         // if (utilTool.isPauseState()) {
@@ -162,15 +178,17 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileHandler.draw(g2d);
 
-        for (Object entry : obj) {
-            if (entry != null) {
-                entry.draw(g2d);
-            }
-        }
-
         for (Entity ent : npc) {
             if (ent != null) {
                 ent.draw(g2d);
+            }
+        }
+
+        // FOR EACH LOOP FAILS WITH CONCURRENT MODIFICATION ERR
+        for (int i = obj.size() - 1; i >= 0; i--) {
+            Object entry = obj.get(i);
+             if (entry != null) {
+                entry.draw(g2d);
             }
         }
 

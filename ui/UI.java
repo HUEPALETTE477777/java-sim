@@ -26,6 +26,7 @@ public class UI {
     public Menu menuComponent;
     public Dialogue dialogueComponent;
     public Controls controlsComponent;
+    public Inventory inventoryComponent;
 
     public String currentDialogue = "";
     public BufferedImage dialogueCharacterImage;
@@ -38,10 +39,12 @@ public class UI {
         this.tileHandler = tileHandler;
         this.sound = sound;
         this.npc = npc;
+
         utilTool = new Utility(this.gamePanel, this.keyInput);
         menuComponent = new Menu(gamePanel);
         dialogueComponent = new Dialogue(gamePanel);
         controlsComponent = new Controls(gamePanel);
+        inventoryComponent = new Inventory(gamePanel);
     }
 
     public void update(int fpsCount) {
@@ -56,6 +59,7 @@ public class UI {
                 break;
             case 1:
                 renderPlayState(g2d);
+                inventoryComponent.inventoryCollapsedScreen(g2d);
                 break;
             case 2:
                 pauseScreen(g2d);
@@ -65,6 +69,8 @@ public class UI {
                 break;
             case 4: 
                 controlsComponent.controlsScreen(g2d);
+            case 5: 
+                inventoryComponent.inventoryExpandedScreen(g2d);
             default:
                 break;
         }
@@ -74,8 +80,6 @@ public class UI {
     public void renderPlayState(Graphics2D g2d) {
         if (utilTool.isHUD()) {
             drawHUD(g2d);
-        } else {
-            redraw(g2d);
         }
     }
 
