@@ -101,6 +101,7 @@ public class Sound {
 
             if (currentAudioSecond > currentAudioDuration) {
                 currentAudioSecond = 0;
+                loop();
             }
         }
 

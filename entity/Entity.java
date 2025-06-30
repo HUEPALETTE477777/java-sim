@@ -24,8 +24,13 @@ public class Entity {
     public int spriteCount = 0;
     public int spriteNum = 0;
 
+    // HITBOX/COLLISION BOX
     public Rectangle collisionBox = new Rectangle(0, 0, 64, 64);
     public boolean collisionToggle = false;
+
+    // NPC IMAGE SIZE
+    public int entityImageWidth = 64;
+    public int entityImageHeight = 64;
 
     public String entityName;
     Utility utilTool;
@@ -101,7 +106,7 @@ public class Entity {
         boolean withinCameraBounds = utilTool.EntityWithinScreenBounds(this);
         if (withinCameraBounds) {
             BufferedImage currentImage = utilTool.updateSpriteImage(this);
-            g2d.drawImage(currentImage, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2d.drawImage(currentImage, screenX, screenY, entityImageWidth, entityImageHeight, null);
             utilTool.entityNameAlignment(g2d, screenX, screenY, entityName);
         }
     }

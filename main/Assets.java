@@ -3,8 +3,9 @@ package main;
 import javax.imageio.ImageIO;
 
 import entity.Entity;
-import entity.NPC_GaryPearlson;
-import main.objects.OBJ_KNIFE;
+import entity.NPC.NPC_GaryPearlson;
+import entity.NPC.NPC_Nicole;
+import main.objects.OBJ_Knife;
 import main.objects.Object;
 
 import java.awt.image.BufferedImage;
@@ -24,10 +25,16 @@ public class Assets {
         gamePanel.npc[0].worldY = 256;
         gamePanel.npc[0].speed = 1;
         gamePanel.npc[0].direction = "down";
+
+        gamePanel.npc[1] = new NPC_Nicole(gamePanel, utilTool);
+        gamePanel.npc[1].worldX = 256;
+        gamePanel.npc[1].worldY = 250;
+        gamePanel.npc[1].speed = 1;
+        gamePanel.npc[1].direction = "right";
     }
 
     public void setObjects() {
-        gamePanel.obj.add(new OBJ_KNIFE(gamePanel, utilTool));
+        gamePanel.obj.add(new OBJ_Knife(gamePanel, utilTool));
     }
 
     /**********************************************************************************************************
@@ -36,11 +43,11 @@ public class Assets {
         /images/npcs/GaryPearlson/GaryPearlson_down_0 
     **********************************************************************************************************/
     public void setUpEntityImages(Entity entity, String entityType, String entityName) {
-        entity.left0 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
+        entity.left0 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_left_0");
         entity.left1 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
         entity.left2 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
 
-        entity.right0 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
+        entity.right0 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_right_0");
         entity.right1 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
         entity.right2 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
 
@@ -48,7 +55,7 @@ public class Assets {
         entity.down1 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
         entity.down2 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
 
-        entity.up0 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
+        entity.up0 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_up_0");
         entity.up1 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
         entity.up2 = ImageRetrieval("/images/" + entityType + "/" + entityName + "/" + entityName + "_down_0");
     }

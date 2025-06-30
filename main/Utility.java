@@ -238,6 +238,11 @@ public class Utility {
         gamePanel.sound.play();
         gamePanel.sound.fc.setValue(gamePanel.sound.currentVolume);
         gamePanel.sound.loop();
+
+        if (gamePanel.keyInput.muteMusic) {
+            // TOO LAZY TO SIFT THRU LOGIC FOR CHANGING VOLUME TO NONE
+            gamePanel.sound.stop();
+        }
     }
 
     public String extractSongName() {

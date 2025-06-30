@@ -1,5 +1,7 @@
-package entity;
+package entity.NPC;
 
+import entity.DialogueNode;
+import entity.Entity;
 import main.GamePanel;
 import main.Utility;
 
@@ -15,12 +17,9 @@ public class NPC_GaryPearlson extends Entity {
         entityName = "The Predatory Substitute";
 
         setDialogueTree();
-        fetchImages();
-    }
-
-    public void fetchImages() {
         gamePanel.assets.setUpEntityImages(this, "npcs", "GaryPearlson");
     }
+
 
     public void setDialogueTree() {
         rootDialogueNode = new DialogueNode("HEYA!!11!");

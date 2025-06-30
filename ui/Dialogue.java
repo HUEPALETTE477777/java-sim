@@ -37,10 +37,10 @@ public class Dialogue {
             y += 40;
         }
 
-        int dialogueCharacterImageX = gamePanel.tileSize;
-        int dialogueCharacterImageY =  gamePanel.SCREEN_HEIGHT - gamePanel.tileSize * 8;      
+        int dialogueCharacterImageX = gamePanel.SCREEN_WIDTH - (gamePanel.tileSize * 12);
+        int dialogueCharacterImageY =  gamePanel.tileSize;      
         int dialogueCharacterImageWidth = gamePanel.tileSize * 10;
-        int dialogueCharacterImageHeight = gamePanel.tileSize * 3;
+        int dialogueCharacterImageHeight = gamePanel.tileSize * 12;
         
         g2d.drawImage(gamePanel.ui.dialogueCharacterImage, dialogueCharacterImageX, dialogueCharacterImageY, dialogueCharacterImageWidth, dialogueCharacterImageHeight, null);
     }
